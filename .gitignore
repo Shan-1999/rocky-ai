@@ -1,0 +1,21 @@
+# Maven
+target/
+*.jar
+*.war
+*.class
+mvnw.cmd.bak
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# Secrets — NEVER push your API key
+application-local.properties
+
+# OS
+.DS_Store
+Thumbs.db
