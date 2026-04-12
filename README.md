@@ -111,9 +111,31 @@ DELETE /aria/memory
 * Personality system
 * REST API
 
-### 🔜 Phase 2 — In Progress
+## 🧠 Memory System (Phase 2)
 
-* Persistent memory (PostgreSQL)
+Rocky AI now supports persistent conversational memory using PostgreSQL.
+
+### Features:
+- Stores user and assistant messages
+- Retrieves last 20 messages for contextual responses
+- Maintains conversation continuity after restart
+
+---
+
+## 🔐 Secure Configuration
+
+Sensitive data is externalized using environment variables:
+
+Required:
+- DB_USERNAME
+- DB_PASSWORD
+- OPENAI_API_KEY
+
+---
+
+## 🤖 Built With AI Assistance
+
+This project was developed with the assistance of AI tools, focusing on backend architecture, system design, and AI integration.
 
 ### 🔜 Phase 3 — Tools
 
