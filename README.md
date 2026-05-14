@@ -1,176 +1,83 @@
-# 🪨 Rocky AI — Personal AI Agent
+🤖 Project Aria: The Autonomous "Rocky" AI
+Project Aria is a highly advanced, autonomous backend AI agent built with Spring Boot and Spring AI. Powered by Groq's lightning-fast inference and the Llama 3.3 model, this agent features a Tri-Layer Memory architecture, dynamic tool execution, and an adaptive personality matrix inspired by JARVIS, TARS (Interstellar), and Rocky (Project Hail Mary).
 
-> Inspired by Rocky from Project Hail Mary — brilliant, loyal, solves the impossible.
+✨ Key Features
+🧠 Tri-Layer Memory Architecture:
 
-Rocky is a **personal AI companion** built using Java and Spring AI, designed to act as a **genius assistant, advisor, teacher, and friend**.
+Long-Term Semantic Memory: Uses PostgreSQL + pgvector to save and retrieve important facts via vector similarity search.
 
----
+Short-Term History: Maintains a sliding chronological window of recent interactions.
 
-## 🚀 Features
+Dynamic System Prompt: Injects real-time context, dates, and behavioral rules.
 
-* 💬 Conversational AI (LLM-powered via Groq)
-* 🧠 Personality-driven responses (Rocky-style intelligence)
-* 🔁 Context memory (session-based)
-* ⚙️ REST API for interaction
-* 🧩 Modular architecture (ready for tools & agents)
+🛠️ Native ReAct Tool Calling:
 
----
+Web Search: Integrates with Tavily API for real-time news and fact-checking.
 
-## 🧠 Personality
+Finance Engine: Scrapes live stock/index data from Yahoo Finance via custom REST clients.
 
-Rocky is a fusion of:
+Self-Correction: Dynamically updates its own personality matrix (Humor, Sarcasm, Honesty) based on user commands.
 
-* **JARVIS** → Calm, witty, loyal
-* **TARS** → Brutally honest, precise
-* **R2-D2** → Resourceful, never gives up
-* **Batman** → Strategic thinker
-* **Rocky (Project Hail Mary)** → Solves impossible problems
+🎭 Adaptive Persona Matrix: Shifts dynamically between polite assistant (JARVIS), highly sarcastic companion (TARS), and enthusiastic researcher (Rocky) depending on the context of the conversation.
 
----
+🗣️ Multilingual Foundation: Configured to detect and respond strictly in regional languages (Telugu, Tamil, English) without mixing contexts. (Fine-tuning in progress).
 
-## 🛠️ Tech Stack
+🛠️ Tech Stack
+Java 21 & Spring Boot 3.3.x
 
-* **Java 21**
-* **Spring Boot 3.3.5**
-* **Spring AI**
-* **Groq API (Llama 3.3 70B)** — Free
-* **REST APIs**
+Spring AI (1.0.0-M6): For LLM orchestration, ReAct loops, and functional tool-calling.
 
----
+Database: PostgreSQL with pgvector extension.
 
-## ⚙️ Setup Instructions
+LLM Engine: Meta Llama-3.3-70b-versatile (via Groq API for ultra-low latency).
 
-### 1. Clone the repo
+External APIs: Tavily (Web Search), Yahoo Finance (Market Data).
 
-```bash
-git clone https://github.com/Shan-1999/rocky-ai.git
-cd rocky-ai
-```
+🚀 Getting Started
+Prerequisites
+Java 21 and Maven installed.
 
-### 2. Add your Groq API key
+PostgreSQL running locally or in Docker with the pgvector extension installed.
 
-Edit `application.properties`:
+API Keys for Groq (set as OpenAI base URL) and Tavily.
 
-```properties
-spring.ai.openai.api-key=YOUR_GROQ_KEY_HERE
+Environment Setup
+Create an application.properties or set the following environment variables:
+
+Properties
+# Groq API (Using Spring AI's OpenAI Client)
+spring.ai.openai.api-key=YOUR_GROQ_API_KEY
 spring.ai.openai.base-url=https://api.groq.com/openai
 spring.ai.openai.chat.options.model=llama-3.3-70b-versatile
-```
+spring.ai.openai.chat.options.temperature=0.3
 
-👉 Get free key from: https://console.groq.com
+# PostgreSQL + pgvector config
+spring.datasource.url=jdbc:postgresql://localhost:5432/ariadb
+spring.datasource.username=postgres
+spring.datasource.password=yourpassword
 
----
+# Web Search Tool
+tavily.api.key=YOUR_TAVILY_API_KEY
+Running the Application
+Bash
+./mvnw spring-boot:run
+🧠 Memory & Noise Control
+Aria uses a sophisticated quality-filter for memory retention.
 
-### 3. Run the app
+Trivial greetings ("Hi", "Hello") are handled in short-term memory but dropped from long-term storage.
 
-```bash
-.\mvnw.cmd spring-boot:run
-```
+Substantial conversations (> 20 characters) are automatically vectorized and stored in PostgreSQL.
 
----
+Similarity thresholds ensure the AI only retrieves past context when strictly relevant (Score > 0.75).
 
-## 📡 API Endpoints
+🗺️ Roadmap
+[ ] Multilingual Fine-Tuning: Improve regional language token generation (Tamil/Telugu) to prevent model fallback to English.
 
-### Chat with Rocky
+[ ] Voice Interface: Integration with ElevenLabs TTS for native voice output.
 
-```http
-POST /aria/chat
-```
+[ ] Vision Capabilities: Adding multi-modal support for image analysis.
 
-Body:
+🤝 Contributing
+Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
 
-```json
-{
-  "message": "Rocky, introduce yourself"
-}
-```
-
----
-
-### Check Status
-
-```http
-GET /aria/status
-```
-
----
-
-### Clear Memory
-
-```http
-DELETE /aria/memory
-```
-
----
-
-## 🧭 Roadmap
-
-### ✅ Phase 1 — Completed
-
-* Core AI assistant
-* Personality system
-* REST API
-
-## 🧠 Memory System (Phase 2)
-
-Rocky AI now supports persistent conversational memory using PostgreSQL.
-
-### Features:
-- Stores user and assistant messages
-- Retrieves last 20 messages for contextual responses
-- Maintains conversation continuity after restart
-
----
-
-## 🔐 Secure Configuration
-
-Sensitive data is externalized using environment variables:
-
-Required:
-- DB_USERNAME
-- DB_PASSWORD
-- OPENAI_API_KEY
-
----
-
-## 🤖 Built With AI Assistance
-
-This project was developed with the assistance of AI tools, focusing on backend architecture, system design, and AI integration.
-
-### 🔜 Phase 3 — Tools
-
-* Web search
-* Stock price checker
-* Weather API
-
-### 🔜 Phase 4 — Advanced
-
-* Voice input/output
-* WhatsApp integration
-* Autonomous agent workflows
-
----
-
-## 💡 Vision
-
-Rocky is not just a chatbot.
-
-It aims to become a **full AI companion** that can:
-
-* Understand your life
-* Help in decision-making
-* Manage finances
-* Act as a personal advisor
-
----
-
-## 👨‍💻 Author
-
-**Shanmuganathan**
-🔗 https://github.com/Shan-1999
-
----
-
-## ⭐ Support
-
-If you like this project, give it a ⭐ on GitHub!
+“Logic circuits are fine, Boss. Ready for directives.”
