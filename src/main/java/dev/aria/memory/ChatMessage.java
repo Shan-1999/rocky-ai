@@ -4,6 +4,8 @@ import lombok.*;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Data
 public class ChatMessage {
@@ -15,6 +17,7 @@ public class ChatMessage {
     private String role;
     @Column(columnDefinition = "TEXT")
     private String content;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime timestamp;
 
     public ChatMessage() {}
